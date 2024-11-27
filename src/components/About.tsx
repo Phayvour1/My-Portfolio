@@ -37,7 +37,7 @@ const About = () => {
           <motion.span
             whileHover={hoverEffect}
             style={cursorStyle}
-            className="font-bold text-indigo-500 text-3xl md:text-2xl"
+            className="font-bold text-gray-800 text-3xl md:text-2xl"
           >
             pixel-perfect
           </motion.span>{" "}
@@ -45,7 +45,7 @@ const About = () => {
           <motion.span
             whileHover={hoverEffect}
             style={cursorStyle}
-            className="font-bold text-blue-500 text-3xl md:text-3xl"
+            className="font-bold text-gray-800 text-3xl md:text-3xl"
           >
             high-performance UIs
           </motion.span>{" "}
@@ -57,7 +57,7 @@ const About = () => {
           <motion.span
             whileHover={hoverEffect}
             style={cursorStyle}
-            className="font-bold text-green-500 text-3xl md:text-3xl"
+            className="font-bold text-gray-800 text-3xl md:text-3xl"
           >
             frontend developer
           </motion.span>
@@ -66,7 +66,7 @@ const About = () => {
           <motion.span
             whileHover={hoverEffect}
             style={cursorStyle}
-            className="font-bold text-purple-500 text-3xl md:text-3xl"
+            className="font-bold text-gray-900 text-3xl md:text-3xl"
           >
             ideating solutions
           </motion.span>{" "}
@@ -81,7 +81,7 @@ const About = () => {
           <motion.span
             whileHover={hoverEffect}
             style={cursorStyle}
-            className="font-bold text-pink-500 text-6xl md:text-6xl"
+            className="font-bold text-gray-900 text-5xl md:text-5xl"
           >
             extraordinary
           </motion.span>{" "}

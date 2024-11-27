@@ -90,13 +90,13 @@ export default function App() {
       <div>
         <Dsvg/>
       </div>
-      <div>
+      <div  id="about">
         <About/>
       </div>
-      <div>
+      <div id="projects">
         <Projects/>
       </div>
-      <div>
+      <div id="contact">
         <Contact/>
       </div>
       <div>

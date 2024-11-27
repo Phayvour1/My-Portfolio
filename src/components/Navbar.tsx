@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 
 const Navbar = () => {
-  const fonts = ["font-serif", "font-signika", "font-sans"]; // Fonts list
-  const [currentFont, setCurrentFont] = useState(fonts[0]);  // Default font
+  const fonts = ["font-serif", "font-signika", "font-sans"]; 
+  const [currentFont, setCurrentFont] = useState(fonts[0]); 
   const [isOpen, setIsOpen] = useState(false);
 
   // Change font every 100ms (for fast blinking effect)
@@ -11,9 +11,9 @@ const Navbar = () => {
     const intervalId = setInterval(() => {
       const randomFont = fonts[Math.floor(Math.random() * fonts.length)];
       setCurrentFont(randomFont);
-    }, 100); // Update the font every 100ms to make it blink fast
+    }, 100); 
 
-    return () => clearInterval(intervalId); // Clean up interval on unmount
+    return () => clearInterval(intervalId);
   }, []);
 
   return (
@@ -111,15 +111,15 @@ const Navbar = () => {
             animate={{ opacity: 1, y: "0%" }}    // Ends in place
             exit={{
               opacity: 0, 
-              y: "-100%",           // Move completely back up when closing
+              y: "-100%",          
               transition: { 
-                duration: 0.5,      // Smooth duration
-                ease: "easeInOut"   // Smooth easing for exit
+                duration: 0.5,     
+                ease: "easeInOut"   
               }
             }}
             transition={{
               opacity: { duration: 0.3 },
-              y: { duration: 0.5, ease: "easeInOut" },  // Smooth easing when opening and closing
+              y: { duration: 0.5, ease: "easeInOut" },  
             }}
           >
             {["About", "Projects", "Contact"].map((item) => (
@@ -127,7 +127,7 @@ const Navbar = () => {
                 <a
                   href={`#${item.toLowerCase()}`}
                   className="text-8xl font-thin tracking-[15px] leading-tight"
-                  onClick={() => setIsOpen(false)} // Close menu on click
+                  onClick={() => setIsOpen(false)} 
                 >
                   <span className="relative group-hover:text-black">{item}</span>
                   <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-black transition-all duration-300 group-hover:w-full rounded-full"></span>

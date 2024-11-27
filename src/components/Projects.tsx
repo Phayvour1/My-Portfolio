@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 const projects = [
   {
     title: "Herbetea E-commerce Website",
-    tools: ["React", "Node.js", "MongoDB", "Tailwind CSS", "Stripe"],
+    tools: ["React", "Node.js", "Tailwind CSS", "Stripe"],
     imageUrl: "/herbetea.png", 
     projectUrl: "https://herbetea.netlify.app/", 
   },
@@ -16,7 +16,7 @@ const projects = [
   },
   {
     title: "Craneo Project Management Dashboard",
-    tools: ["React", "Next.js", "Socket.io", "Chart.js", "Tailwind CSS"],
+    tools: ["Next.js", "Socket.io", "Chart.js", "Tailwind CSS"],
     imageUrl: "/CraneoPM.png",
     projectUrl: "https://dashboard.example.com", 
   },
