@@ -37,7 +37,7 @@ const About = () => {
           <motion.span
             whileHover={hoverEffect}
             style={cursorStyle}
-            className="font-bold text-gray-800 text-3xl md:text-2xl"
+            className="font-bold text-gray-800 text-2xl md:text-2xl"
           >
             pixel-perfect
           </motion.span>{" "}
@@ -45,7 +45,7 @@ const About = () => {
           <motion.span
             whileHover={hoverEffect}
             style={cursorStyle}
-            className="font-bold text-gray-800 text-3xl md:text-3xl"
+            className="font-bold text-gray-800 text-2xl md:text-2xl"
           >
             high-performance UIs
           </motion.span>{" "}
@@ -57,7 +57,7 @@ const About = () => {
           <motion.span
             whileHover={hoverEffect}
             style={cursorStyle}
-            className="font-bold text-gray-800 text-3xl md:text-3xl"
+            className="font-bold text-gray-800 text-2xl md:text-2xl"
           >
             frontend developer
           </motion.span>
@@ -66,7 +66,7 @@ const About = () => {
           <motion.span
             whileHover={hoverEffect}
             style={cursorStyle}
-            className="font-bold text-gray-900 text-3xl md:text-3xl"
+            className="font-bold text-gray-900 text-2xl md:text-2xl"
           >
             ideating solutions
           </motion.span>{" "}
@@ -76,12 +76,12 @@ const About = () => {
        
 
         {/* Conditional text expansion for smaller screens */}
-        <p className={`text-4xl md:text-2xl leading-relaxed mt-8 ${expanded ? '' : 'line-clamp-3'}`}>
+        <p className={`text-2xl md:text-2xl leading-relaxed mt-8 ${expanded ? '' : 'line-clamp-3'}`}>
           Let’s create something{" "}
           <motion.span
             whileHover={hoverEffect}
             style={cursorStyle}
-            className="font-bold text-gray-900 text-5xl md:text-5xl"
+            className="font-bold text-gray-900 text-3xl md:text-3xl"
           >
             extraordinary
           </motion.span>{" "}
