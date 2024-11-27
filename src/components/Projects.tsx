@@ -3,20 +3,20 @@ import { motion } from 'framer-motion';
 const projects = [
   {
     title: "Herbetea E-commerce Website",
-    tools: ["React", "Node.js", "Tailwind CSS", "Stripe"],
+    tools: ["React", "Node.js", "Tailwind", "Stripe"],
     imageUrl: "/herbetea.png", 
     projectUrl: "https://herbetea.netlify.app/", 
   },
   
   {
     title: "Craneo Blog",
-    tools: ["Next.js", "Sanity", "Tailwind CSS", "Vercel"],
+    tools: ["Next.js", "Sanity", "Tailwind", "Vercel"],
     imageUrl: "/CraneoBlog.png",
     projectUrl: "https://craneo-blog.vercel.app/", 
   },
   {
     title: "Craneo Project Management Dashboard",
-    tools: ["Next.js", "Socket.io", "Chart.js", "Tailwind CSS"],
+    tools: ["Next.js", "Socket.io", "Chart.js", "Tailwind"],
     imageUrl: "/CraneoPM.png",
     projectUrl: "https://dashboard.example.com", 
   },
