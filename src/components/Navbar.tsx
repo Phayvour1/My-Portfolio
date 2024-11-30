@@ -18,36 +18,34 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav
-      className="sticky top-0 bg-gradient-to-br from-gray-300 to-gray-100 text-gray-800 shadow-md z-50 p-4 md:px-10"
-    >
+    <nav className="sticky top-0 bg-gradient-to-br from-gray-300 to-gray-100 text-gray-800 shadow-md z-50 p-4 md:px-10">
       <div className="container mx-auto flex justify-between items-center">
         {/* Title: "falola." static, "FAVOUR" dynamic */}
         <h1 className="mt-2 text-2xl font flex items-center gap-1">
-          Falola.
-          <motion.span
-            className={`transition-all duration-10 ${currentFont}`}
-            initial={{ scale: 1 }}
-            animate={{
-              scale: [1, 1.2, 1],
-              transition: {
-                duration: 0.5,
-                repeat: Infinity, // Repeat indefinitely for continuous blinking effect
-              },
-            }}
-            onMouseEnter={() => {
-              // Font changes continuously on hover as well
-              const intervalId = setInterval(() => {
-                const randomFont = fonts[Math.floor(Math.random() * fonts.length)];
-                setCurrentFont(randomFont);
-              }, 100); // Keeps changing every 100ms while hovered
+          <Link to="/" className="flex items-center gap-1">
+            Falola.
+            <motion.span
+              className={`transition-all duration-10 ${currentFont}`}
+              initial={{ scale: 1 }}
+              animate={{
+                scale: [1, 1.2, 1],
+                transition: {
+                  duration: 0.5,
+                  repeat: Infinity, // Repeat indefinitely for continuous blinking effect
+                },
+              }}
+              onMouseEnter={() => {
+                const intervalId = setInterval(() => {
+                  const randomFont = fonts[Math.floor(Math.random() * fonts.length)];
+                  setCurrentFont(randomFont);
+                }, 100);
 
-              // Clear interval after mouse leaves
-              return () => clearInterval(intervalId);
-            }}
-          >
-            FAVOUR
-          </motion.span>
+                return () => clearInterval(intervalId);
+              }}
+            >
+              FAVOUR
+            </motion.span>
+          </Link>
         </h1>
 
         {/* Hamburger Icon for Mobile */}
@@ -62,7 +60,6 @@ const Navbar = () => {
             animate={{
               rotate: isOpen ? 45 : 0,
               y: isOpen ? 6 : 0,
-              opacity: isOpen ? 1 : 1, // Ensure it stays visible
             }}
             transition={{ duration: 0.3 }}
           ></motion.div>
@@ -72,7 +69,7 @@ const Navbar = () => {
             className="w-5 h-0.5 bg-black mb-1 rounded-full"
             initial={{ opacity: 1 }}
             animate={{
-              opacity: isOpen ? 0 : 1, // Fade out when menu is open
+              opacity: isOpen ? 0 : 1,
             }}
             transition={{ duration: 0.3 }}
           ></motion.div>
@@ -84,7 +81,6 @@ const Navbar = () => {
             animate={{
               rotate: isOpen ? -45 : 0,
               y: isOpen ? -6 : 0,
-              opacity: isOpen ? 1 : 1, // Ensure it stays visible
             }}
             transition={{ duration: 0.3 }}
           ></motion.div>
@@ -109,20 +105,14 @@ const Navbar = () => {
         {isOpen && (
           <motion.ul
             className="absolute top-16 left-0 w-full bg-gray-100 shadow-md flex flex-col items-center py-20 md:hidden"
-            initial={{ opacity: 0, y: "-50%" }} // Starts from above
-            animate={{ opacity: 1, y: "0%" }} // Ends in place
+            initial={{ opacity: 0, y: "-50%" }}
+            animate={{ opacity: 1, y: "0%" }}
             exit={{
               opacity: 0,
               y: "-100%",
-              transition: {
-                duration: 0.5,
-                ease: "easeInOut",
-              },
+              transition: { duration: 0.5, ease: "easeInOut" },
             }}
-            transition={{
-              opacity: { duration: 0.3 },
-              y: { duration: 0.5, ease: "easeInOut" },
-            }}
+            transition={{ opacity: { duration: 0.3 }, y: { duration: 0.5, ease: "easeInOut" } }}
           >
             {["Resume", "Projects", "Contact"].map((item) => (
               <li key={item} className="py-4 relative group">
