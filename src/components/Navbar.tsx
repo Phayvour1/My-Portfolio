@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link as ScrollLink } from "react-scroll"; // Import react-scroll's Link
+import { Link as RouterLink } from "react-router-dom";
 
 const Navbar = () => {
   const fonts = ["font-serif", "font-signika", "font-sans"];
@@ -22,7 +23,7 @@ const Navbar = () => {
       <div className="container mx-auto flex justify-between items-center">
         {/* Title: "falola." static, "FAVOUR" dynamic */}
         <h1 className="mt-2 text-2xl font flex items-center gap-1">
-          <Link to="/" className="flex items-center gap-1">
+          <RouterLink to="/" className="flex items-center gap-1">
             Falola.
             <motion.span
               className={`transition-all duration-10 ${currentFont}`}
@@ -31,21 +32,13 @@ const Navbar = () => {
                 scale: [1, 1.2, 1],
                 transition: {
                   duration: 0.5,
-                  repeat: Infinity, // Repeat indefinitely for continuous blinking effect
+                  repeat: Infinity,
                 },
-              }}
-              onMouseEnter={() => {
-                const intervalId = setInterval(() => {
-                  const randomFont = fonts[Math.floor(Math.random() * fonts.length)];
-                  setCurrentFont(randomFont);
-                }, 100);
-
-                return () => clearInterval(intervalId);
               }}
             >
               FAVOUR
             </motion.span>
-          </Link>
+          </RouterLink>
         </h1>
 
         {/* Hamburger Icon for Mobile */}
@@ -53,31 +46,24 @@ const Navbar = () => {
           className="md:hidden text-3xl focus:outline-none ml-4 relative"
           onClick={() => setIsOpen(!isOpen)}
         >
-          {/* First Line */}
           <motion.div
             className="w-5 h-0.5 bg-black mb-1 rounded-full"
-            initial={{ opacity: 1, rotate: 0 }}
+            initial={{ rotate: 0 }}
             animate={{
               rotate: isOpen ? 45 : 0,
               y: isOpen ? 6 : 0,
             }}
             transition={{ duration: 0.3 }}
           ></motion.div>
-
-          {/* Second Line */}
           <motion.div
             className="w-5 h-0.5 bg-black mb-1 rounded-full"
-            initial={{ opacity: 1 }}
             animate={{
               opacity: isOpen ? 0 : 1,
             }}
             transition={{ duration: 0.3 }}
           ></motion.div>
-
-          {/* Third Line */}
           <motion.div
             className="w-5 h-0.5 bg-black rounded-full"
-            initial={{ opacity: 1, rotate: 0 }}
             animate={{
               rotate: isOpen ? -45 : 0,
               y: isOpen ? -6 : 0,
@@ -88,15 +74,31 @@ const Navbar = () => {
 
         {/* Desktop Menu */}
         <ul className="hidden md:flex gap-8">
-          {["Resume", "Projects", "Contact"].map((item) => (
-            <li key={item} className="relative group">
-              <Link
-                to={item === "Resume" ? "/resume" : `/#${item.toLowerCase()}`}
-                className="hover:text-gray-400 text-lg"
-              >
-                <span className="relative group-hover:text-black">{item}</span>
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-black transition-all duration-300 group-hover:w-full rounded-full"></span>
-              </Link>
+          {[
+            { name: "Resume", link: "/resume", type: "router" },
+            { name: "Projects", link: "projects", type: "scroll" },
+            { name: "Contact", link: "contact", type: "scroll" },
+          ].map(({ name, link, type }) => (
+            <li key={name} className="relative group">
+              {type === "router" ? (
+                <RouterLink
+                  to={link}
+                  className="hover:text-gray-400 text-lg relative"
+                >
+                  <span>{name}</span>
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-black transition-all duration-300 ease-in-out group-hover:w-full"></span>
+                </RouterLink>
+              ) : (
+                <ScrollLink
+                  to={link}
+                  smooth={true}
+                  duration={500}
+                  className="cursor-pointer hover:text-gray-400 text-lg relative"
+                >
+                  <span>{name}</span>
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-black transition-all duration-300 ease-in-out group-hover:w-full"></span>
+                </ScrollLink>
+              )}
             </li>
           ))}
         </ul>
@@ -112,18 +114,38 @@ const Navbar = () => {
               y: "-100%",
               transition: { duration: 0.5, ease: "easeInOut" },
             }}
-            transition={{ opacity: { duration: 0.3 }, y: { duration: 0.5, ease: "easeInOut" } }}
+            transition={{
+              opacity: { duration: 0.3 },
+              y: { duration: 0.5, ease: "easeInOut" },
+            }}
           >
-            {["Resume", "Projects", "Contact"].map((item) => (
-              <li key={item} className="py-4 relative group">
-                <Link
-                  to={item === "Resume" ? "/resume" : `/#${item.toLowerCase()}`}
-                  className="text-8xl font-thin tracking-[15px] leading-tight"
-                  onClick={() => setIsOpen(false)}
-                >
-                  <span className="relative group-hover:text-black">{item}</span>
-                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-black transition-all duration-300 group-hover:w-full rounded-full"></span>
-                </Link>
+            {[
+              { name: "Resume", link: "/resume", type: "router" },
+              { name: "Projects", link: "projects", type: "scroll" },
+              { name: "Contact", link: "contact", type: "scroll" },
+            ].map(({ name, link, type }) => (
+              <li key={name} className="py-4 gap-3 relative group">
+                {type === "router" ? (
+                  <RouterLink
+                    to={link}
+                    className="text-7xl font-light  tracking-wider relative"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    {name}
+                    <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gray-700 transition-all duration-300 ease-in-out group-hover:w-full"></span>
+                  </RouterLink>
+                ) : (
+                  <ScrollLink
+                    to={link}
+                    smooth={true}
+                    duration={500}
+                    className="cursor-pointer text-7xl font-light  tracking-wider relative"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    {name}
+                    <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gray-700 transition-all duration-300 ease-in-out group-hover:w-full"></span>
+                  </ScrollLink>
+                )}
               </li>
             ))}
           </motion.ul>
