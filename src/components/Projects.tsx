@@ -5,7 +5,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 const projects = [
   {
     title: "Herbetea E-commerce Website",
-    tools: ["React", "Node.js", "Tailwind", "Stripe"],
+    tools: ["React", "Node.js", "Tailwind"],
     imageUrl: "/herbetea.png",
     projectUrl: "https://herbetea.netlify.app/",
   },
@@ -16,7 +16,7 @@ const projects = [
     projectUrl: "https://craneo-blog.vercel.app/",
   },
   {
-    title: "Craneo Project Management Dashboard",
+    title: "Project Management Dashboard",
     tools: ["Next.js", "Socket.io", "Chart.js", "Tailwind"],
     imageUrl: "/CraneoPM.png",
     projectUrl: "https://dashboard.example.com",
@@ -54,13 +54,13 @@ const Projects = () => {
   return (
     <div className="bg-gray-100 min-h-screen overflow-hidden p-4">
       <div>
-        <h1 className="text-2xl text-gray-800 p-6 font-signika">
+        <h1 className="relative-content text-3xl text-gray-800 pt-10 font-signika">
           Check out some of my works
         </h1>
       </div>
       {/* Projects container */}
       <div className="relative w-full h-full">
-        <div className="w-full h-full flex flex-col items-center justify-center space-y-12">
+        <div className="w-full h-full flex flex-col items-center justify-center space-y-6">
           {projects.map((project, index) => (
             <a
               key={index}
@@ -70,7 +70,7 @@ const Projects = () => {
               className={`block w-full h-auto group project-card-${index} shadow-2xl hover:shadow-3xl transition-shadow duration-300 rounded-xl`}
             >
               {/* Project Card */}
-              <div className="relative w-full h-auto p-14">
+              <div className="relative w-full h-auto p-4">
                 {/* Image */}
                 <img
                   src={project.imageUrl}
@@ -86,7 +86,7 @@ const Projects = () => {
                     {project.tools.map((tool, idx) => (
                       <span
                         key={idx}
-                        className="text-sm font-semibold text-gray-300 bg-gray-700 px-4 py-2 rounded-full"
+                        className="text-sm font-light text-gray-300 bg-gray-700 px-4 py-2 rounded-full"
                       >
                         {tool}
                       </span>
