@@ -2,11 +2,11 @@
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-400 text-gray-100 py-6 text-center">
-      <p className="text-lg">
-        © 2024 <span className="font-signika text-gray-400">Craneo</span>.
+    <footer className=" bg-gray-600 text-gray-400 py-6 text-center">
+      <p className=" relative-content text-lg">
+        © 2024 <span className="font-signika text-gray-600">Craneo</span>.
       </p>
-      <p className="text-sm mt-2">
+      <p className=" relative-content text-sm mt-2">
         Designed and Developed by{" "}
         <a
           href="https://twitter.com/Falola_Favour"

@@ -16,6 +16,7 @@ export default {
         lora: ['Lora', 'serif'],
         montserrat: ['Montserrat', 'sans-serif'],
         openSans: ['Open Sans', 'sans-serif'],
+        nexafont: ['Nexa', 'sans-serif'],
       },
     },
   },

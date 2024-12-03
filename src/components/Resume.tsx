@@ -16,7 +16,7 @@ const Resume = () => {
       <div className="w-full  h-screen">
         <iframe
           src={resumeViewUrl}
-          className="w-full h-full  border-0 "
+          className="w-[95%] h-[90%]  border-0 "
           title="Resume"
         ></iframe>
       </div>
