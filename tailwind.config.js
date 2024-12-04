@@ -17,6 +17,8 @@ export default {
         montserrat: ['Montserrat', 'sans-serif'],
         openSans: ['Open Sans', 'sans-serif'],
         nexafont: ['Nexa', 'sans-serif'],
+        playfairDisplay: ['Playfair Display', 'serif'],
+        pachang: ['Pachang', 'sans-serif'],
       },
     },
   },

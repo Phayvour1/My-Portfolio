@@ -61,13 +61,17 @@ export default function App() {
       Your
     </motion.span>
   </h4>
+  
   <h1
-    className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-signika flex justify-center relative overflow-hidden text-center"
-    style={{
-      fontSize: "clamp(2rem, 12vw, 16rem)", // Adjusted clamp for scaling
-      lineHeight: "1.1",
+    className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-panchang flex justify-center relative overflow-hidden text-center"
+                    style={{
+    
+      fontSize: "clamp(2rem, 8vw, 20rem)", // Adjusted clamp for scaling
+      lineHeight: "1.3",
       textShadow: "5px 4px 6px rgba(0, 0, 0, 0.3)", // Keep the text shadow for consistency
-    }}
+       transform: "scaleY(1.4)", // Make the text taller (adjust the value as needed)
+    transformOrigin: "center"
+                    }}
   >
     {["F", "R", "O", "N", "T", "-", "E", "N", "D"].map((letter, index) => (
       <motion.span
