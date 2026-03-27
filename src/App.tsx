@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { useEffect, useRef } from "react";
 import Navbar from "./components/Navbar";
 import Dsvg from "./components/Dsvg";
 import About from "./components/About";
@@ -6,44 +6,24 @@ import Projects from "./components/Projects";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import Resume from "./components/Resume";
-import ParticlesBackground from "./components/ParticlesBackground";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-
-const animateWobbleAndHover = {
-  hidden: { rotate: 0, scale: 1 },
-  show: {
-    rotate: [0, -1, 2, -1, 2, 0],
-    scale: 1,
-    transition: {
-      duration: 8,
-      ease: "easeInOut",
-      repeat: Infinity,
-    },
-  },
-  hover: {
-    scale: 1.15,
-    transition: { duration: 0.5, ease: "easeInOut" },
-  },
-};
-
-const animateOnLoad = {
-  hidden: { opacity: 0, y: 20 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 1, ease: "easeOut" },
-  },
-};
+import { fadeUp } from "./utils/animations";
 
 export default function App() {
+  const heroRef = useRef<HTMLDivElement>(null);
+  const heading1Ref = useRef<HTMLHeadingElement>(null);
+  const heading2Ref = useRef<HTMLHeadingElement>(null);
+  const heading3Ref = useRef<HTMLHeadingElement>(null);
+
+  useEffect(() => {
+    if (heading1Ref.current) fadeUp(heading1Ref.current, 0);
+    if (heading2Ref.current) fadeUp(heading2Ref.current, 0.2);
+    if (heading3Ref.current) fadeUp(heading3Ref.current, 0.4);
+  }, []);
+
   return (
     <Router>
-      <div className="relative bg-gradient-to-br from-gray-300 to-gray-100 text-gray-800">
-        {/* Particles Background */}
-        <ParticlesBackground />
-
-
-
+      <div className="relative bg-white text-black font-sans selection:bg-black selection:text-white">
         {/* Navbar */}
         <Navbar />
 
@@ -53,47 +33,31 @@ export default function App() {
             path="/"
             element={
               <>
-<div className="relative w-full flex flex-col items-center justify-center pt-10 min-h-[55vh] sm:pt-14 lg:pt-16">
-  <h4
-    className="absolute left-[15%] top-[18%] text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light transform -translate-x-1/2"
-  >
-    <motion.span variants={animateOnLoad} initial="hidden" animate="show">
-      Your
-    </motion.span>
-  </h4>
-  
-  <h1
-    className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-panchang flex justify-center relative overflow-hidden text-center"
-                    style={{
-    
-      fontSize: "clamp(2rem, 8vw, 20rem)", // Adjusted clamp for scaling
-      lineHeight: "1.3",
-      textShadow: "5px 4px 6px rgba(0, 0, 0, 0.3)", // Keep the text shadow for consistency
-       transform: "scaleY(1.4)", // Make the text taller (adjust the value as needed)
-    transformOrigin: "center"
-                    }}
-  >
-    {["F", "R", "O", "N", "T", "-", "E", "N", "D"].map((letter, index) => (
-      <motion.span
-        key={index}
-        className="inline-block"
-        variants={animateWobbleAndHover}
-        initial="hidden"
-        animate="show"
-        whileHover="hover"
-      >
-        {letter}
-      </motion.span>
-    ))}
-  </h1>
-  <h4
-    className="absolute right-[15%] bottom-[5%] text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light transform translate-x-1/2"
-  >
-    <motion.span variants={animateOnLoad} initial="hidden" animate="show">
-      Guy
-    </motion.span>
-  </h4>
-</div>
+                <div
+                  ref={heroRef}
+                  className="relative w-full flex flex-col items-center justify-center pt-20 pb-10 min-h-[60vh] px-4"
+                >
+                  <h4
+                    ref={heading1Ref}
+                    className="text-2xl sm:text-3xl md:text-4xl text-gray-500 font-medium tracking-tight mb-2 opacity-0"
+                  >
+                    Your
+                  </h4>
+
+                  <h1
+                    ref={heading2Ref}
+                    className="text-6xl sm:text-7xl md:text-8xl lg:text-[10rem] font-bold tracking-tighter leading-none text-center opacity-0"
+                  >
+                    FRONT-END
+                  </h1>
+
+                  <h4
+                    ref={heading3Ref}
+                    className="text-2xl sm:text-3xl md:text-4xl text-gray-500 font-medium tracking-tight mt-2 opacity-0"
+                  >
+                    Guy
+                  </h4>
+                </div>
 
                 <div>
                   <About />

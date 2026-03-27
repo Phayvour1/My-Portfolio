@@ -1,6 +1,5 @@
-import { useEffect } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useEffect, useRef } from "react";
+import { fadeUp, staggerReveal, lineExpand } from "../utils/animations";
 
 const projects = [
   {
@@ -23,80 +22,80 @@ const projects = [
   },
 ];
 
-gsap.registerPlugin(ScrollTrigger);
-
 const Projects = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const headingRef = useRef<HTMLHeadingElement>(null);
+  const lineRef = useRef<HTMLDivElement>(null);
+  const projectCardsRef = useRef<HTMLAnchorElement[]>([]);
+
   useEffect(() => {
-    projects.forEach((_, index) => {
-      gsap.fromTo(
-        `.project-card-${index}`,
-        {
-          opacity: 0,
-          x: index % 2 === 0 ? -100 : 100, // Alternating direction
-        },
-        {
-          opacity: 1,
-          x: 0,
-          scrollTrigger: {
-            trigger: `.project-card-${index}`,
-            start: "top 80%", // Trigger animation when the top of the card is 80% into the viewport
-            end: "bottom 20%", // Keep the animation active until the bottom of the card is 20% into the viewport
-            scrub: true, // Scrubs animation with the scroll
-            once: true, // Trigger only once
-          },
-          duration: 0.8,
-          ease: "power3.out",
-        }
-      );
-    });
+    if (headingRef.current) fadeUp(headingRef.current);
+    if (lineRef.current) lineExpand(lineRef.current);
+    if (projectCardsRef.current.length > 0) {
+      staggerReveal(projectCardsRef.current, containerRef.current);
+    }
   }, []);
 
   return (
-    <div className="bg-gray-100 min-h-screen overflow-hidden p-4">
-      <div>
-        <h1 className="relative-content text-3xl text-gray-800 pt-10 font-signika">
-          Check out some of my works
+    <div className="bg-white min-h-screen p-6 md:p-12 lg:p-24" ref={containerRef}>
+      <div className="mb-16 max-w-7xl mx-auto">
+        <h1 ref={headingRef} className="text-4xl md:text-5xl font-bold tracking-tight text-black mb-6 opacity-0">
+          Selected Works
         </h1>
+        <div ref={lineRef} className="w-full h-[1px] bg-gray-200 origin-left scale-x-0"></div>
       </div>
+
       {/* Projects container */}
-      <div className="relative w-full h-full">
-        <div className="w-full h-full flex flex-col items-center justify-center space-y-6">
-          {projects.map((project, index) => (
-            <a
-              key={index}
-              href={project.projectUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`block w-full h-auto group project-card-${index} shadow-2xl hover:shadow-3xl transition-shadow duration-300 rounded-xl`}
-            >
-              {/* Project Card */}
-              <div className="relative w-full h-auto p-4">
-                {/* Image */}
+      <div className="max-w-7xl mx-auto flex flex-col space-y-24">
+        {projects.map((project, index) => (
+          <a
+            key={index}
+            href={project.projectUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            ref={(el) => {
+               if (el && !projectCardsRef.current.includes(el)) projectCardsRef.current.push(el);
+            }}
+            className="group block w-full opacity-0 transform translate-y-8"
+          >
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+              {/* Image Section */}
+              <div className="md:col-span-8 overflow-hidden bg-gray-50 aspect-video relative rounded-lg border border-gray-100">
                 <img
                   src={project.imageUrl}
                   alt={project.title}
-                  className="w-full h-auto object-cover opacity-75 transition-opacity duration-300 ease-in-out group-hover:opacity-100 rounded-xl"
+                  className="w-full h-full object-cover object-top transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-105"
                 />
-                {/* Content Layer */}
-                <div
-                  className="text-content absolute inset-x-0 bottom-0 bg-gray-300 text-white p-8 flex flex-col items-center space-y-4 opacity-0 group-hover:opacity-100 group-hover:translate-y-0 translate-y-full transition-all duration-500 rounded-xl"
-                >
-                  <h3 className="text-xl text-gray-600 font-signika">{project.title}</h3>
-                  <div className="flex justify-center space-x-4">
-                    {project.tools.map((tool, idx) => (
-                      <span
-                        key={idx}
-                        className="text-sm font-light text-gray-300 bg-gray-700 px-4 py-2 rounded-full"
-                      >
-                        {tool}
-                      </span>
-                    ))}
-                  </div>
+                <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              </div>
+
+              {/* Content Section */}
+              <div className="md:col-span-4 flex flex-col space-y-4">
+                <h3 className="text-2xl font-semibold tracking-tight text-black group-hover:text-gray-600 transition-colors duration-300">
+                  {project.title}
+                </h3>
+
+                <div className="flex flex-wrap gap-2">
+                  {project.tools.map((tool, idx) => (
+                    <span
+                      key={idx}
+                      className="text-sm font-medium text-gray-500 bg-gray-50 px-3 py-1 border border-gray-100 rounded"
+                    >
+                      {tool}
+                    </span>
+                  ))}
+                </div>
+
+                <div className="pt-4 flex items-center text-sm font-medium text-black">
+                  View Project
+                  <span className="ml-2 transform group-hover:translate-x-1 transition-transform duration-300">
+                    →
+                  </span>
                 </div>
               </div>
-            </a>
-          ))}
-        </div>
+            </div>
+          </a>
+        ))}
       </div>
     </div>
   );

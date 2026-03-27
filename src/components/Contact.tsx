@@ -1,46 +1,60 @@
-import { motion } from "framer-motion";
+import { useEffect, useRef } from "react";
 import { FaLinkedin, FaGithub, FaTwitter, FaEnvelope } from "react-icons/fa";
+import { fadeUp, staggerReveal, lineExpand } from "../utils/animations";
 
 const ContactPage = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const headingRef = useRef<HTMLHeadingElement>(null);
+  const lineRef = useRef<HTMLDivElement>(null);
+  const iconsRef = useRef<HTMLDivElement[]>([]);
+
   const icons = [
-    { icon: <FaLinkedin />, link: "https://linkedin.com/in/falola_favour", color: "#0077B5" },
-    { icon: <FaGithub />, link: "https://github.com/phayvour1", color: "#171515" },
-    { icon: <FaTwitter />, link: "https://twitter.com/falola_favour", color: "#1DA1F2" },
-    { icon: <FaEnvelope />, link: "mailto:pharlorlah700@gmail.com", color: "#D44638" },
+    { icon: <FaLinkedin />, link: "https://linkedin.com/in/falola_favour" },
+    { icon: <FaGithub />, link: "https://github.com/phayvour1" },
+    { icon: <FaTwitter />, link: "https://twitter.com/falola_favour" },
+    { icon: <FaEnvelope />, link: "mailto:pharlorlah700@gmail.com" },
   ];
 
+  useEffect(() => {
+    if (headingRef.current) fadeUp(headingRef.current);
+    if (lineRef.current) lineExpand(lineRef.current);
+    if (iconsRef.current.length > 0) {
+      staggerReveal(iconsRef.current, containerRef.current);
+    }
+  }, []);
+
   return (
-    <div className="min-h-screen flex flex-col justify-center items-center bg-gradient-to-br from-gray-100 to-gray-500 text-gray-800 font-signika p-0">
-      {/* Heading Text Animation */}
-      <motion.h1
-        className="relative-content text-4xl md:text-5xl lg:text-5xl mb-10 text-center p-0"
-        initial={{ opacity: 0, y: 50 }}  // Initially offscreen and hidden
-        whileInView={{ opacity: 1, y: 0 }} // Animate when in view
-        transition={{ duration: 1 }}
-        viewport={{ once: true }}  // Trigger animation only once
-      >
-        Want to work with me?
-        <br />
-        Let's Connect
-      </motion.h1>
+    <div className="min-h-screen flex flex-col justify-center items-center bg-white text-black p-6 md:p-12 lg:p-24" ref={containerRef}>
+
+      <div className="max-w-3xl w-full text-center mb-16">
+         {/* Heading Text Animation */}
+        <h1
+          ref={headingRef}
+          className="text-4xl md:text-5xl lg:text-7xl font-bold tracking-tight mb-8 opacity-0"
+        >
+          Let's Work <br /> Together
+        </h1>
+        <div ref={lineRef} className="w-16 h-[2px] bg-black mx-auto origin-center scale-x-0"></div>
+      </div>
       
       {/* Icons Animation */}
-      <div className="relative-content flex flex-wrap justify-center gap-8 md:gap-12">
+      <div className="flex flex-wrap justify-center gap-10 md:gap-16">
         {icons.map((item, index) => (
-          <motion.div
+          <div
             key={index}
-            initial={{ opacity: 0, y: 50 }}  // Initially offscreen
-            whileInView={{ opacity: 1, y: 0 }}  // Animate when in view
-            transition={{ duration: 0.8, delay: index * 0.2 }}  // Stagger delay for each icon
-            whileHover={{ scale: 1.4, color: item.color }}
-            whileTap={{ scale: 0.9 }}
-            className="text-3xl md:text-4xl cursor-pointer"  // Adjusted icon size here
-            style={{ transition: "all 0.3s ease" }}
+            ref={(el) => {
+              if (el && !iconsRef.current.includes(el)) iconsRef.current.push(el);
+            }}
+            className="text-3xl md:text-4xl cursor-pointer text-gray-400 hover:text-black hover:scale-[1.03] transition-all duration-200 ease-out opacity-0 translate-y-4"
             onClick={() => window.open(item.link, "_blank")}
           >
             {item.icon}
-          </motion.div>
+          </div>
         ))}
+      </div>
+
+      <div className="mt-32 text-center text-sm font-medium text-gray-400">
+        © {new Date().getFullYear()} Falola Favour
       </div>
     </div>
   );

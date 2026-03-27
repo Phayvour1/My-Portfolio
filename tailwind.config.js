@@ -7,18 +7,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        cursive: ['Pacifico', 'cursive'],
-        bold: ['Roboto', 'sans-serif'],
-        signika: ['Signika', 'sans-serif'],
-        roboto: ['Roboto', 'sans-serif'],
-        inter: ['Inter', 'sans-serif'],
-        poppins: ['Poppins', 'sans-serif'],
-        lora: ['Lora', 'serif'],
-        montserrat: ['Montserrat', 'sans-serif'],
-        openSans: ['Open Sans', 'sans-serif'],
-        nexafont: ['Nexa', 'sans-serif'],
-        playfairDisplay: ['Playfair Display', 'serif'],
-        pachang: ['Pachang', 'sans-serif'],
+        sans: ['Inter', 'sans-serif'],
       },
     },
   },
