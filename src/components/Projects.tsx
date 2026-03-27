@@ -4,18 +4,21 @@ import { fadeUp, staggerReveal, lineExpand } from "../utils/animations";
 const projects = [
   {
     title: "Herbetea E-commerce Website",
+    outcome: "Developed a modern, scalable e-commerce platform ensuring smooth cart flow and product management.",
     tools: ["React", "Node.js", "Tailwind"],
     imageUrl: "/herbetea.png",
     projectUrl: "https://herbetea.netlify.app/",
   },
   {
     title: "Craneo Blog",
+    outcome: "Built a robust static blog system providing an optimized reading experience and easy content administration.",
     tools: ["Next.js", "Sanity", "Tailwind", "Vercel"],
     imageUrl: "/CraneoBlog.png",
     projectUrl: "https://craneo-blog.vercel.app/",
   },
   {
     title: "Project Management Dashboard",
+    outcome: "Created a real-time data dashboard to track active projects, timelines, and metrics efficiently.",
     tools: ["Next.js", "Socket.io", "Chart.js", "Tailwind"],
     imageUrl: "/CraneoPM.png",
     projectUrl: "https://dashboard.example.com",
@@ -37,16 +40,16 @@ const Projects = () => {
   }, []);
 
   return (
-    <div className="bg-white min-h-screen p-6 md:p-12 lg:p-24" ref={containerRef}>
-      <div className="mb-16 max-w-7xl mx-auto">
-        <h1 ref={headingRef} className="text-4xl md:text-5xl font-bold tracking-tight text-black mb-6 opacity-0">
-          Selected Works
-        </h1>
-        <div ref={lineRef} className="w-full h-[1px] bg-gray-200 origin-left scale-x-0"></div>
+    <section className="section-container" ref={containerRef}>
+      <div className="w-full mb-16 space-y-12">
+        <h2 ref={headingRef} className="text-[40px] font-semibold tracking-tight text-black text-center opacity-0">
+          Selected Projects
+        </h2>
+        <div ref={lineRef} className="w-full h-[1px] bg-black/10 origin-left scale-x-0"></div>
       </div>
 
       {/* Projects container */}
-      <div className="max-w-7xl mx-auto flex flex-col space-y-24">
+      <div className="w-full flex flex-col space-y-12">
         {projects.map((project, index) => (
           <a
             key={index}
@@ -56,48 +59,44 @@ const Projects = () => {
             ref={(el) => {
                if (el && !projectCardsRef.current.includes(el)) projectCardsRef.current.push(el);
             }}
-            className="group block w-full opacity-0 transform translate-y-8"
+            className="group block w-full p-12 md:p-16 rounded-2xl border border-black/10 bg-white opacity-0 transition-transform duration-200 ease-out hover:-translate-y-[6px]"
           >
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
-              {/* Image Section */}
-              <div className="md:col-span-8 overflow-hidden bg-gray-50 aspect-video relative rounded-lg border border-gray-100">
-                <img
-                  src={project.imageUrl}
-                  alt={project.title}
-                  className="w-full h-full object-cover object-top transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              </div>
-
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
               {/* Content Section */}
-              <div className="md:col-span-4 flex flex-col space-y-4">
-                <h3 className="text-2xl font-semibold tracking-tight text-black group-hover:text-gray-600 transition-colors duration-300">
+              <div className="flex flex-col space-y-6">
+                <h3 className="text-[24px] font-semibold tracking-tight text-black">
                   {project.title}
                 </h3>
 
-                <div className="flex flex-wrap gap-2">
+                <p className="text-[18px] leading-relaxed text-neutral-500 max-w-paragraph">
+                  {project.outcome}
+                </p>
+
+                <div className="flex flex-wrap gap-2 pt-2">
                   {project.tools.map((tool, idx) => (
                     <span
                       key={idx}
-                      className="text-sm font-medium text-gray-500 bg-gray-50 px-3 py-1 border border-gray-100 rounded"
+                      className="text-[14px] text-neutral-500 bg-gray-50 border border-black/10 px-3 py-1 rounded"
                     >
                       {tool}
                     </span>
                   ))}
                 </div>
+              </div>
 
-                <div className="pt-4 flex items-center text-sm font-medium text-black">
-                  View Project
-                  <span className="ml-2 transform group-hover:translate-x-1 transition-transform duration-300">
-                    →
-                  </span>
-                </div>
+              {/* Image Section */}
+              <div className="overflow-hidden bg-gray-50 aspect-video relative rounded-lg border border-black/10">
+                <img
+                  src={project.imageUrl}
+                  alt={project.title}
+                  className="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
+                />
               </div>
             </div>
           </a>
         ))}
       </div>
-    </div>
+    </section>
   );
 };
 

@@ -24,17 +24,17 @@ const ContactPage = () => {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col justify-center items-center bg-white text-black p-6 md:p-12 lg:p-24" ref={containerRef}>
+    <section className="section-container min-h-screen justify-center" ref={containerRef}>
 
-      <div className="max-w-3xl w-full text-center mb-16">
+      <div className="max-w-paragraph w-full text-center mb-16">
          {/* Heading Text Animation */}
-        <h1
+        <h2
           ref={headingRef}
-          className="text-4xl md:text-5xl lg:text-7xl font-bold tracking-tight mb-8 opacity-0"
+          className="text-[40px] font-semibold tracking-tight text-black mb-12 opacity-0"
         >
-          Let's Work <br /> Together
-        </h1>
-        <div ref={lineRef} className="w-16 h-[2px] bg-black mx-auto origin-center scale-x-0"></div>
+          Let's Work Together
+        </h2>
+        <div ref={lineRef} className="w-16 h-[1px] bg-black mx-auto origin-center scale-x-0"></div>
       </div>
       
       {/* Icons Animation */}
@@ -45,7 +45,7 @@ const ContactPage = () => {
             ref={(el) => {
               if (el && !iconsRef.current.includes(el)) iconsRef.current.push(el);
             }}
-            className="text-3xl md:text-4xl cursor-pointer text-gray-400 hover:text-black hover:scale-[1.03] transition-all duration-200 ease-out opacity-0 translate-y-4"
+            className="text-[32px] cursor-pointer text-neutral-500 hover:text-black hover:scale-[1.03] transition-all duration-200 ease-out opacity-0 translate-y-4"
             onClick={() => window.open(item.link, "_blank")}
           >
             {item.icon}
@@ -53,10 +53,10 @@ const ContactPage = () => {
         ))}
       </div>
 
-      <div className="mt-32 text-center text-sm font-medium text-gray-400">
+      <div className="mt-32 text-center text-[14px] font-medium text-neutral-500">
         © {new Date().getFullYear()} Falola Favour
       </div>
-    </div>
+    </section>
   );
 };
 

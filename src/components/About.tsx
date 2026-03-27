@@ -3,7 +3,7 @@ import { staggerReveal, imageReveal } from "../utils/animations";
 
 const About = () => {
   const profileRef = useRef<HTMLDivElement>(null);
-  const sectionRef = useRef<HTMLElement>(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
   const textRefs = useRef<HTMLParagraphElement[]>([]);
 
   useEffect(() => {
@@ -17,7 +17,7 @@ const About = () => {
   }, []);
 
   return (
-    <div className="bg-white text-black min-h-screen p-6 md:p-12 lg:p-24 flex flex-col justify-center items-center">
+    <section className="section-container min-h-screen">
       {/* Profile Picture */}
       <div className="flex justify-center items-center mb-16">
         <div
@@ -27,39 +27,26 @@ const About = () => {
           <img
             src="/cropped favor.png"
             alt="Profile"
-            className="object-cover w-full h-full grayscale hover:grayscale-0 transition-all duration-500"
+            className="object-cover w-full h-full grayscale transition-all duration-500"
           />
         </div>
       </div>
 
       {/* Text Content */}
-      <section ref={sectionRef} className="max-w-4xl text-center mx-auto space-y-8">
+      <div ref={sectionRef} className="max-w-paragraph text-center mx-auto space-y-8">
+        <h2 className="text-[40px] font-semibold text-black mb-12">
+          About
+        </h2>
         <p
           ref={(el) => {
              if (el && !textRefs.current.includes(el)) textRefs.current.push(el);
           }}
-          className="text-xl md:text-3xl font-medium leading-relaxed tracking-tight text-gray-600 opacity-0"
+          className="text-[18px] leading-relaxed text-neutral-500 opacity-0"
         >
-          I build <span className="text-black font-semibold">pixel-perfect</span> and <span className="text-black font-semibold">high-performance web applications</span> that are not only visually stunning but also intuitive enough for anyone to use.
+          I design and build reliable digital products.
         </p>
-        <p
-          ref={(el) => {
-             if (el && !textRefs.current.includes(el)) textRefs.current.push(el);
-          }}
-          className="text-xl md:text-3xl font-medium leading-relaxed tracking-tight text-gray-600 opacity-0"
-        >
-          I’m not just a <span className="text-black font-semibold">frontend developer</span>—I’m a problem-solver and creator who thrives on being part of the entire product development process. From <span className="text-black font-semibold">ideating solutions</span> to engineering seamless functionality, I bring passion and precision to every project.
-        </p>
-        <p
-          ref={(el) => {
-             if (el && !textRefs.current.includes(el)) textRefs.current.push(el);
-          }}
-          className="text-2xl md:text-4xl font-semibold leading-relaxed tracking-tight text-black mt-12 opacity-0"
-        >
-          Let’s create something extraordinary.
-        </p>
-      </section>
-    </div>
+      </div>
+    </section>
   );
 };
 

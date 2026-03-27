@@ -1,6 +1,5 @@
 import { useEffect, useRef } from "react";
 import Navbar from "./components/Navbar";
-import Dsvg from "./components/Dsvg";
 import About from "./components/About";
 import Projects from "./components/Projects";
 import Contact from "./components/Contact";
@@ -11,19 +10,19 @@ import { fadeUp } from "./utils/animations";
 
 export default function App() {
   const heroRef = useRef<HTMLDivElement>(null);
-  const heading1Ref = useRef<HTMLHeadingElement>(null);
-  const heading2Ref = useRef<HTMLHeadingElement>(null);
-  const heading3Ref = useRef<HTMLHeadingElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
+  const subtitleRef = useRef<HTMLParagraphElement>(null);
+  const descriptionRef = useRef<HTMLParagraphElement>(null);
 
   useEffect(() => {
-    if (heading1Ref.current) fadeUp(heading1Ref.current, 0);
-    if (heading2Ref.current) fadeUp(heading2Ref.current, 0.2);
-    if (heading3Ref.current) fadeUp(heading3Ref.current, 0.4);
+    if (titleRef.current) fadeUp(titleRef.current, 0);
+    if (subtitleRef.current) fadeUp(subtitleRef.current, 0.2);
+    if (descriptionRef.current) fadeUp(descriptionRef.current, 0.4);
   }, []);
 
   return (
     <Router>
-      <div className="relative bg-white text-black font-sans selection:bg-black selection:text-white">
+      <div className="relative bg-white text-black font-sans selection:bg-black selection:text-white min-h-screen flex flex-col">
         {/* Navbar */}
         <Navbar />
 
@@ -33,37 +32,34 @@ export default function App() {
             path="/"
             element={
               <>
-                <div
+                <section
                   ref={heroRef}
-                  className="relative w-full flex flex-col items-center justify-center pt-20 pb-10 min-h-[60vh] px-4"
+                  className="section-container min-h-[70vh] justify-center text-center space-y-8"
                 >
-                  <h4
-                    ref={heading1Ref}
-                    className="text-2xl sm:text-3xl md:text-4xl text-gray-500 font-medium tracking-tight mb-2 opacity-0"
-                  >
-                    Your
-                  </h4>
-
                   <h1
-                    ref={heading2Ref}
-                    className="text-6xl sm:text-7xl md:text-8xl lg:text-[10rem] font-bold tracking-tighter leading-none text-center opacity-0"
+                    ref={titleRef}
+                    className="text-[48px] md:text-[72px] font-semibold tracking-tight leading-tight opacity-0"
                   >
-                    FRONT-END
+                    Frontend Engineer
                   </h1>
 
-                  <h4
-                    ref={heading3Ref}
-                    className="text-2xl sm:text-3xl md:text-4xl text-gray-500 font-medium tracking-tight mt-2 opacity-0"
+                  <p
+                    ref={subtitleRef}
+                    className="text-[18px] md:text-[24px] text-neutral-500 max-w-paragraph mx-auto leading-relaxed opacity-0"
                   >
-                    Guy
-                  </h4>
-                </div>
+                    I build fast, reliable interfaces and scalable digital products.
+                  </p>
+
+                  <p
+                    ref={descriptionRef}
+                    className="text-[14px] md:text-[16px] text-neutral-500 max-w-paragraph mx-auto leading-relaxed opacity-0"
+                  >
+                    Focused on performance, clarity, and maintainable architecture.
+                  </p>
+                </section>
 
                 <div>
                   <About />
-                </div>
-                <div>
-                  <Dsvg />
                 </div>
                 <div id="projects">
                   <Projects />

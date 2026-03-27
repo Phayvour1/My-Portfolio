@@ -59,7 +59,7 @@ export const staggerReveal = (
       opacity: 1,
       y: 0,
       stagger: 0.08,
-      duration: 0.7,
+      duration: 0.6,
       ease: "power2.out",
       scrollTrigger: {
         trigger: triggerElement || elements,
@@ -114,7 +114,7 @@ export const imageReveal = (element: Element | string) => {
       opacity: 1,
       y: 0,
       duration: 1,
-      ease: "power3.out",
+      ease: "power2.out",
       scrollTrigger: {
         trigger: element,
         start: "top 85%",
