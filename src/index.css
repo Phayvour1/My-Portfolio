@@ -1,58 +1,134 @@
-@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:wght@900&display=swap');
-@import url('https://api.fontshare.com/v2/css?f[]=pachang@400&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+@import url('https://api.fontshare.com/v2/css?f[]=pachang@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-
 @layer base {
-  .font-cursive {
-    font-family: "Pacifico", cursive;
+  :root {
+    --bg-primary: 255 255 255; /* White base */
+    --text-primary: 10 10 10;
+    --accent: 0 0 0; /* Black accent */
+    
+    --color-section-1: #ffffff;
+    --color-section-2: #f3f4f6;
+    --color-section-3: #e5e7eb;
+    --color-section-4: #000000;
   }
-  .font-extrabold {
-    font-family: "Roboto Black", sans-serif;
+
+  .dark {
+    --bg-primary: 10 10 10; /* Black base */
+    --text-primary: 245 245 245;
+    --accent: 255 255 255;
+    
+    --color-section-1: #0a0a0a;
+    --color-section-2: #171717;
+    --color-section-3: #262626;
+    --color-section-4: #ffffff;
+  }
+
+  body {
+    @apply bg-white dark:bg-neutral-950 text-gray-900 dark:text-neutral-100 font-sans antialiased scroll-smooth;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
+  }
+
+  .nav-link {
+    position: relative;
+    @apply transition-colors duration-300;
+  }
+
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: currentColor;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+  }
+
+  .nav-link:hover::after,
+  .nav-link.active::after {
+    transform: scaleX(1);
+  }
+
+  .availability-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #4ade80; /* green */
+    display: inline-block;
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.85); }
   }
 }
 
-/* ---- reset ---- */
-body {
-  margin: 0;
-  font: normal 75% Arial, Helvetica, sans-serif;
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
 }
 
-canvas {
-  display: block;
-  vertical-align: bottom;
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
 }
 
-/* ---- particles.js container ---- */
-#particles-js {
+/* Journey Swiper Pagination */
+.journey-swiper .swiper-pagination {
+  bottom: 2rem !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  width: auto !important;
+}
+
+.journey-swiper .swiper-pagination-bullet {
+  width: 4px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.25) !important;
+  border-radius: 999px;
+  opacity: 1;
+  transition: width 0.3s ease, background 0.3s ease;
+}
+
+.journey-swiper .swiper-pagination-bullet-active {
+  width: 24px !important;
+  background: rgba(255, 255, 255, 0.8) !important;
+  border-radius: 999px;
+}
+
+/* ── Hero ambient glow (pure CSS, no JS) ─────────────────────────────── */
+.hero-ambient {
   position: absolute;
-  width: 100%;
-  height: 100%;
-  background-color: #E3E5E9;
-  background-size: cover;
-  background-position: 50% 50%;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 80% 55% at 65% -5%,  rgba(99, 102, 241, 0.08) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 40% at  5% 85%,  rgba(139, 92, 246, 0.05) 0%, transparent 60%);
+  animation: hero-ambient-shift 14s ease-in-out infinite alternate;
 }
 
-
-/* Make sure the content has a higher z-index */
-.relative-content {
-  position: relative; /* Ensure the position is relative */
-  z-index: 10; /* Higher z-index than the particles background */
-}
-
-
-
-@font-face {
-  font-family: 'Panchang';
-  src: url('/fonts/Panchang-Bold.otf') format('opentype');
-  font-weight: bold;
-  font-style: normal;
-}
-
-.font-panchang {
-  font-family: 'Panchang', sans-serif;
+@keyframes hero-ambient-shift {
+  0%   { opacity: 0.65; transform: scale(1)    translate(0,     0);    }
+  50%  { opacity: 1;    transform: scale(1.05) translate(1.5%,  1%);   }
+  100% { opacity: 0.75; transform: scale(1.02) translate(-1%,  0.5%); }
 }
